@@ -981,37 +981,205 @@ function parseHlLines(str) {
 async function exportImage(jpeg) {
   showLoading('Rendering image…');
   try {
-    const canvas = await html2canvas($('code-card'), {
-      scale: 2.5, useCORS: true, backgroundColor: null, logging: false,
-      allowTaint: true,
-    });
     const mime = jpeg ? 'image/jpeg' : 'image/png';
-    const ext = jpeg ? 'jpg' : 'png';
-    canvas.toBlob(blob => {
-      download(blob, title() + '.' + ext);
-      hideLoading();
-      toast('Downloaded ' + ext.toUpperCase() + '!');
-    }, mime, 0.95);
+    const ext  = jpeg ? 'jpg' : 'png';
+    const blob = await renderCodeCardToBlob(mime);
+    download(blob, title() + '.' + ext);
+    hideLoading();
+    toast('Downloaded ' + ext.toUpperCase() + '!');
   } catch(e) {
     hideLoading();
     toast('Export failed: ' + e.message, false);
   }
 }
 
+// Render the code card to a Blob by drawing it into an offscreen canvas.
+// This avoids html2canvas screen-capture and produces a clean, full-resolution image.
+async function renderCodeCardToBlob(mime) {
+  // Gather all hljs theme CSS so syntax colours render correctly in the offscreen doc
+  let hljsCSS = '';
+  try {
+    const resp = await fetch($('hljs-theme').href);
+    if (resp.ok) hljsCSS = await resp.text();
+  } catch(_) {}
+
+  // Build a self-contained HTML string for the card
+  const code = $('code-editor').value;
+  let hl;
+  try {
+    hl = S.lang === 'auto'
+      ? hljs.highlightAuto(code).value
+      : hljs.highlight(code, {language: S.lang}).value;
+  } catch(e) { hl = hljs.highlightAuto(code).value; }
+
+  // Apply highlight-line wrappers
+  if (S.hlLines.length) {
+    const parts = hl.split('\n');
+    hl = parts.map((l, i) =>
+      S.hlLines.includes(i + 1)
+        ? `<span style="background:rgba(255,255,255,.07);display:block;margin:0 -${S.padding}px;padding:0 ${S.padding}px">${l}</span>`
+        : l
+    ).join('\n');
+  }
+
+  const lc = code.split('\n').length;
+  const lnHtml = Array.from({length: lc}, (_, i) => i + 1).join('\n');
+  const pad = S.padding;
+  const t = title();
+
+  const extMap = {
+    javascript:'js',typescript:'ts',python:'py',java:'java',cpp:'cpp',c:'c',
+    csharp:'cs',go:'go',rust:'rs',ruby:'rb',php:'php',swift:'swift',kotlin:'kt',
+    html:'html',css:'css',scss:'scss',sql:'sql',bash:'sh',json:'json',yaml:'yml',
+    xml:'xml',markdown:'md',r:'r',lua:'lua',dart:'dart',graphql:'gql',
+  };
+  const langKey = S.lang === 'auto' ? (hljs.highlightAuto(code).language || 'txt') : S.lang;
+  const ext = extMap[langKey] || langKey || 'txt';
+
+  const cardHTML = `<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Outfit:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:transparent;width:${S.cardWidth}px}
+${hljsCSS}
+.card{
+  width:${S.cardWidth}px;
+  border-radius:${S.borderRadius}px;
+  overflow:hidden;
+  background:${S.bg};
+  box-shadow:${S.shadow||'none'};
+  display:inline-block;
+}
+.titlebar{
+  display:${S.showTitlebar?'flex':'none'};
+  align-items:center;gap:8px;
+  padding:11px 16px 11px 14px;
+}
+.dots{display:flex;gap:6px}
+.dot{width:11px;height:11px;border-radius:50%}
+.fname{font-size:12.5px;font-weight:500;opacity:.6;font-family:'Outfit',sans-serif;margin-left:4px}
+.lang-badge{margin-left:auto;font-size:10px;font-weight:600;opacity:.45;
+  text-transform:uppercase;letter-spacing:.06em;font-family:'JetBrains Mono',monospace;
+  display:${S.showLangBadge?'block':'none'}}
+.body{display:flex}
+.lnums{
+  padding:${pad}px 12px ${pad}px ${pad}px;
+  opacity:.3;white-space:pre;user-select:none;
+  font-family:${S.font};font-size:${S.fontSize}px;line-height:${S.lineHeight};
+  display:${S.showLineNums?'block':'none'};
+  flex-shrink:0;text-align:right;
+}
+.code-wrap{flex:1;padding:${pad}px ${pad}px ${pad}px 0;overflow:hidden;min-width:0}
+pre{margin:0}
+code.hljs{
+  display:block;
+  font-family:${S.font};
+  font-size:${S.fontSize}px;
+  line-height:${S.lineHeight};
+  letter-spacing:${S.letterSpacing}em;
+  white-space:${S.wordWrap?'pre-wrap':'pre'};
+  background:transparent!important;
+  padding:0!important;
+}
+</style></head>
+<body>
+<div class="card">
+  <div class="titlebar">
+    <div class="dots">
+      <div class="dot" style="background:#ff5f57"></div>
+      <div class="dot" style="background:#febc2e"></div>
+      <div class="dot" style="background:#28c840"></div>
+    </div>
+    <span class="fname">${t}.${ext}</span>
+    <span class="lang-badge">${ext}</span>
+  </div>
+  <div class="body">
+    <div class="lnums">${lnHtml}</div>
+    <div class="code-wrap"><pre><code class="hljs">${hl}</code></pre></div>
+  </div>
+</div>
+</body></html>`;
+
+  // Load into a hidden iframe so the browser does full layout + font rendering
+  return new Promise((resolve, reject) => {
+    const iframe = document.createElement('iframe');
+    iframe.style.cssText = 'position:fixed;left:-9999px;top:-9999px;border:none;';
+    iframe.style.width  = S.cardWidth + 'px';
+    iframe.style.height = '1px'; // will grow with content
+    document.body.appendChild(iframe);
+
+    iframe.onload = async () => {
+      try {
+        const doc  = iframe.contentDocument;
+        const card = doc.querySelector('.card');
+        const W    = card.offsetWidth;
+        const H    = card.offsetHeight;
+
+        // Resize iframe to exact card size so nothing is clipped
+        iframe.style.width  = W + 'px';
+        iframe.style.height = H + 'px';
+        // Allow one more paint
+        await new Promise(r => setTimeout(r, 200));
+
+        const scale  = 2.5;
+        const canvas = document.createElement('canvas');
+        canvas.width  = W * scale;
+        canvas.height = H * scale;
+        const ctx = canvas.getContext('2d');
+
+        // Serialise the iframe DOM to SVG foreignObject → draw to canvas
+        const svgStr = `
+<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">
+  <foreignObject width="${W}" height="${H}">
+    ${new XMLSerializer().serializeToString(doc.documentElement)}
+  </foreignObject>
+</svg>`;
+
+        const img = new Image();
+        img.onload = () => {
+          ctx.scale(scale, scale);
+          ctx.drawImage(img, 0, 0);
+          document.body.removeChild(iframe);
+          canvas.toBlob(blob => {
+            if (blob) resolve(blob);
+            else reject(new Error('Canvas toBlob returned null'));
+          }, mime, 0.95);
+        };
+        img.onerror = err => {
+          document.body.removeChild(iframe);
+          reject(new Error('SVG render failed'));
+        };
+        img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgStr);
+      } catch(err) {
+        document.body.removeChild(iframe);
+        reject(err);
+      }
+    };
+
+    iframe.srcdoc = cardHTML;
+  });
+}
+
 async function exportPDF() {
   showLoading('Building PDF…');
   try {
-    const canvas = await html2canvas($('code-card'), {
-      scale: 2, useCORS: true, backgroundColor: null, logging: false,
-    });
-    const imgData = canvas.toDataURL('image/png');
-    const {jsPDF} = window.jspdf;
-    const w = canvas.width / 2, h = canvas.height / 2;
-    const pdf = new jsPDF({ orientation: w > h ? 'l' : 'p', unit: 'px', format: [w, h] });
-    pdf.addImage(imgData, 'PNG', 0, 0, w, h);
-    pdf.save(title() + '.pdf');
-    hideLoading();
-    toast('Downloaded PDF!');
+    const blob = await renderCodeCardToBlob('image/png');
+    const url = URL.createObjectURL(blob);
+    const img = new Image();
+    img.onload = () => {
+      const W = img.naturalWidth / 2.5;
+      const H = img.naturalHeight / 2.5;
+      const {jsPDF} = window.jspdf;
+      const pdf = new jsPDF({ orientation: W > H ? 'l' : 'p', unit: 'px', format: [W, H] });
+      pdf.addImage(url, 'PNG', 0, 0, W, H);
+      pdf.save(title() + '.pdf');
+      URL.revokeObjectURL(url);
+      hideLoading();
+      toast('Downloaded PDF!');
+    };
+    img.src = URL.createObjectURL(blob);
   } catch(e) {
     hideLoading();
     toast('PDF failed: ' + e.message, false);
