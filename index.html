@@ -670,10 +670,6 @@ input[type=color]{
             <span class="val-badge" id="cw-val">560</span>
           </div>
           <div class="toggle-row">
-            <span class="toggle-label">Show titlebar</span>
-            <label class="toggle"><input type="checkbox" id="show-titlebar" checked><span class="toggle-track"></span></label>
-          </div>
-          <div class="toggle-row">
             <span class="toggle-label">Show line numbers</span>
             <label class="toggle"><input type="checkbox" id="show-linenums" checked><span class="toggle-track"></span></label>
           </div>
@@ -832,6 +828,7 @@ input[type=color]{
           <span id="zoom-val" style="font-size:10.5px;color:var(--text-3);min-width:32px;font-variant-numeric:tabular-nums">100%</span>
         </div>
         <div class="export-group">
+          <button class="exp-btn" id="copy-formatted-btn" title="Copy with formatting for Word/Docs">📋 Copy Formatted</button>
           <button class="exp-btn" data-fmt="png">PNG</button>
           <button class="exp-btn" data-fmt="jpeg">JPEG</button>
           <button class="exp-btn" data-fmt="pdf">PDF</button>
@@ -842,7 +839,7 @@ input[type=color]{
 
       <div class="preview-canvas" id="preview-canvas">
         <div id="code-card">
-          <div class="card-titlebar" id="card-titlebar">
+          <div class="card-titlebar" id="card-titlebar" style="display:none">
             <div class="mac-dots">
               <div class="mac-dot" style="background:#ff5f57"></div>
               <div class="mac-dot" style="background:#febc2e"></div>
@@ -916,7 +913,7 @@ const S = {
   letterSpacing: 0.02,
   padding: 20,
   cardWidth: 560,
-  showTitlebar: true,
+  showTitlebar: false,
   showLineNums: true,
   wordWrap: false,
   showLangBadge: true,
@@ -1580,6 +1577,74 @@ function copyCode() {
 }
 $('copy-btn').addEventListener('click', copyCode);
 
+// Copy Formatted — copies rich HTML so that when pasted into Word/Docs
+// the code retains its monospace font, line numbers and syntax colours.
+async function copyFormatted() {
+  const code = $('code-editor').value;
+  let hl;
+  try {
+    hl = S.lang === 'auto'
+      ? hljs.highlightAuto(code).value
+      : hljs.highlight(code, { language: S.lang }).value;
+  } catch(e) { hl = hljs.highlightAuto(code).value; }
+
+  // Fetch the current hljs theme CSS so colours survive the paste
+  let hljsCSS = '';
+  try {
+    const resp = await fetch($('hljs-theme').href);
+    if (resp.ok) hljsCSS = await resp.text();
+  } catch(_) {}
+
+  const lines = code.split('\n');
+  const numWidth = String(lines.length).length;
+
+  // Build one <p> per line so Word treats each line as a paragraph
+  // (preserving line breaks on paste). Line numbers are in a fixed-width
+  // <span> so they align correctly.
+  const lineRows = lines.map((_, i) => {
+    const num = String(i + 1).padStart(numWidth, ' ');
+    return `<span style="color:#888;user-select:none;margin-right:16px;font-size:${S.fontSize}px;line-height:${S.lineHeight};font-family:${S.font}">${num}</span>`;
+  });
+
+  // Split the highlighted HTML back into per-line segments
+  // We re-highlight into lines by splitting on newlines
+  const hlLines = hl.split('\n');
+
+  const rowsHtml = hlLines.map((lineHtml, i) => {
+    const numSpan = S.showLineNums ? lineRows[i] : '';
+    return `<p style="margin:0;padding:0;white-space:pre;font-family:${S.font};font-size:${S.fontSize}px;line-height:${S.lineHeight};letter-spacing:${S.letterSpacing}em">${numSpan}${lineHtml || '&#8203;'}</p>`;
+  }).join('');
+
+  const richHTML = `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
+${hljsCSS}
+body{margin:0;padding:0;background:transparent}
+p{margin:0;padding:0;white-space:pre}
+</style></head><body>${rowsHtml}</body></html>`;
+
+  // Use the Clipboard API with both text/html and text/plain
+  try {
+    const htmlBlob = new Blob([richHTML], { type: 'text/html' });
+    // Plain text with line numbers
+    const plainLines = lines.map((l, i) => {
+      const num = S.showLineNums ? String(i + 1).padStart(numWidth, ' ') + '  ' : '';
+      return num + l;
+    });
+    const plainBlob = new Blob([plainLines.join('\n')], { type: 'text/plain' });
+    await navigator.clipboard.write([new ClipboardItem({ 'text/html': htmlBlob, 'text/plain': plainBlob })]);
+    toast('Formatted code copied! Paste into Word/Docs.');
+  } catch(e) {
+    // Fallback: plain text with line numbers
+    const plainLines = lines.map((l, i) => {
+      const num = S.showLineNums ? String(i + 1).padStart(numWidth, ' ') + '  ' : '';
+      return num + l;
+    });
+    navigator.clipboard.writeText(plainLines.join('\n'))
+      .then(() => toast('Copied as plain text (rich copy unavailable)'))
+      .catch(() => toast('Copy failed', false));
+  }
+}
+$('copy-formatted-btn').addEventListener('click', copyFormatted);
+
 // Save / Snippets modal
 $('save-btn').addEventListener('click', saveSnippet);
 $('snippets-btn').addEventListener('click', () => {
@@ -1624,11 +1689,14 @@ $('preview-zoom').addEventListener('input', e => {
   $('code-card').style.transformOrigin = 'top center';
 });
 
-// Titlebar toggle
-$('show-titlebar').addEventListener('change', e => {
-  S.showTitlebar = e.target.checked;
-  $('card-titlebar').style.display = e.target.checked ? '' : 'none';
-});
+// Titlebar toggle (kept in case toggle is re-added)
+const titlebarToggle = $('show-titlebar');
+if (titlebarToggle) {
+  titlebarToggle.addEventListener('change', e => {
+    S.showTitlebar = e.target.checked;
+    $('card-titlebar').style.display = e.target.checked ? '' : 'none';
+  });
+}
 
 // App theme toggle
 $('theme-toggle').addEventListener('click', () => {
