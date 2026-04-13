@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ── Primary SEO ── -->
+  <title>CodeHilite Blog — How to Create Beautiful Code Snippet Images</title>
+  <meta name="description" content="Learn how to use CodeHilite to create stunning code snippet images, share syntax-highlighted code on social media, and boost your developer portfolio. Free tutorials and tips.">
+  <meta name="keywords" content="code snippet image, syntax highlighter online, code to image, share code online, code screenshot tool, developer tools, code beautifier, carbon alternative, ray.so alternative, code formatting">
+  <meta name="author" content="Anmol Dubey">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://codehilite.xyz/blog">
+
+  <!-- ── Open Graph ── -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="https://codehilite.xyz/blog">
+  <meta property="og:title" content="CodeHilite Blog — How to Create Beautiful Code Snippet Images">
+  <meta property="og:description" content="Tips, tutorials, and guides on creating beautiful code snippet images with CodeHilite. Learn how to share code on Twitter, LinkedIn, and beyond.">
+  <meta property="og:image" content="https://codehilite.xyz/og-image.png">
+  <meta property="og:site_name" content="CodeHilite">
+
+  <!-- ── Twitter Card ── -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@codehilite">
+  <meta name="twitter:title" content="CodeHilite Blog — Code Snippet Tips and Tutorials">
+  <meta name="twitter:description" content="Learn how to create stunning code images for social media, portfolios, and presentations using CodeHilite.">
+  <meta name="twitter:image" content="https://codehilite.xyz/og-image.png">
+
+  <!-- ── JSON-LD Blog ── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "CodeHilite Blog",
+    "url": "https://codehilite.xyz/blog",
+    "description": "Tutorials and guides on creating beautiful code snippet images for developers.",
+    "publisher": { "@type": "Person", "name": "Anmol Dubey" },
+    "blogPost": [
+      {
+        "@type": "BlogPosting",
+        "headline": "How to Share Code on Twitter, LinkedIn and Instagram",
+        "url": "https://codehilite.xyz/blog#social-media",
+        "datePublished": "2025-01-01",
+        "author": { "@type": "Person", "name": "Anmol Dubey" }
+      },
+      {
+        "@type": "BlogPosting",
+        "headline": "Best Syntax Highlighting Themes for Code Screenshots",
+        "url": "https://codehilite.xyz/blog#themes",
+        "datePublished": "2025-01-15",
+        "author": { "@type": "Person", "name": "Anmol Dubey" }
+      },
+      {
+        "@type": "BlogPosting",
+        "headline": "Level Up Your Developer Portfolio With Code Images",
+        "url": "https://codehilite.xyz/blog#portfolio",
+        "datePublished": "2025-02-01",
+        "author": { "@type": "Person", "name": "Anmol Dubey" }
+      },
+      {
+        "@type": "BlogPosting",
+        "headline": "PNG vs JPEG vs PDF — Which Format to Use?",
+        "url": "https://codehilite.xyz/blog#export",
+        "datePublished": "2025-02-15",
+        "author": { "@type": "Person", "name": "Anmol Dubey" }
+      },
+      {
+        "@type": "BlogPosting",
+        "headline": "CodeHilite vs Carbon vs Ray.so — Honest Comparison",
+        "url": "https://codehilite.xyz/blog#carbon",
+        "datePublished": "2025-03-01",
+        "author": { "@type": "Person", "name": "Anmol Dubey" }
+      },
+      {
+        "@type": "BlogPosting",
+        "headline": "How to Use Code Images in Tutorials and Online Courses",
+        "url": "https://codehilite.xyz/blog#teaching",
+        "datePublished": "2025-03-15",
+        "author": { "@type": "Person", "name": "Anmol Dubey" }
+      }
+    ]
+  }
+  </script>
+
+  <!-- ── AdSense ── -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2877940277070561" crossorigin="anonymous"></script>
+  <meta name="google-adsense-account" content="ca-pub-2877940277070561">
+
+  <!-- ── Favicon ── -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%236152d8'/><text x='50%' y='54%' dominant-baseline='middle' text-anchor='middle' font-size='18' font-family='monospace' fill='white'>&lt;/&gt;</text></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent: #6152d8;
+      --accent-light: #ede9fe;
+      --text: #0f1117;
+      --text-2: #4b5280;
+      --text-3: #9097b8;
+      --bg: #f5f6fa;
+      --panel: #ffffff;
+      --border: rgba(0,0,0,0.08);
+      --radius: 10px;
+      --radius-lg: 16px;
+    }
+
+    body { font-family: 'Outfit', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+
+    /* Nav */
+    nav { background: var(--panel); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+    .nav-inner { max-width: 900px; margin: 0 auto; padding: 0 24px; height: 54px; display: flex; align-items: center; gap: 16px; }
+    .logo { font-size: 18px; font-weight: 700; letter-spacing: -0.5px; color: var(--accent); text-decoration: none; }
+    .nav-links { display: flex; gap: 4px; margin-left: auto; }
+    .nav-link { padding: 5px 12px; border-radius: 8px; font-size: 13px; font-weight: 500; color: var(--text-2); text-decoration: none; transition: all .12s; }
+    .nav-link:hover { background: #f0eeff; color: var(--accent); }
+    .nav-link.active { background: var(--accent-light); color: var(--accent); }
+    .nav-cta { padding: 6px 14px; border-radius: 8px; background: var(--accent); color: #fff; font-size: 13px; font-weight: 600; text-decoration: none; transition: opacity .12s; }
+    .nav-cta:hover { opacity: .88; }
+
+    /* Hero */
+    .hero { background: linear-gradient(135deg, #6152d8 0%, #a78bfa 100%); color: #fff; text-align: center; padding: 72px 24px 60px; }
+    .hero-tag { display: inline-block; background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.3); border-radius: 99px; padding: 4px 14px; font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 20px; }
+    .hero h1 { font-size: clamp(26px, 5vw, 44px); font-weight: 700; line-height: 1.2; margin-bottom: 16px; }
+    .hero p { font-size: 17px; opacity: .88; max-width: 560px; margin: 0 auto 28px; }
+    .hero-btn { display: inline-flex; align-items: center; gap: 8px; background: #fff; color: var(--accent); padding: 11px 26px; border-radius: 10px; font-size: 14px; font-weight: 700; text-decoration: none; transition: transform .12s, box-shadow .12s; box-shadow: 0 4px 20px rgba(0,0,0,.15); }
+    .hero-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,.2); }
+
+    /* Layout */
+    .page { max-width: 900px; margin: 0 auto; padding: 56px 24px; }
+
+    /* Post Grid */
+    .posts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 24px; margin-bottom: 64px; }
+    .post-card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; transition: transform .15s, box-shadow .15s; text-decoration: none; color: inherit; display: flex; flex-direction: column; }
+    .post-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,.08); }
+    .post-thumb { height: 140px; display: flex; align-items: center; justify-content: center; font-size: 48px; }
+    .post-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+    .post-tag { font-size: 10.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+    .post-title { font-size: 16px; font-weight: 700; line-height: 1.35; margin-bottom: 10px; color: var(--text); }
+    .post-excerpt { font-size: 13px; color: var(--text-2); line-height: 1.6; flex: 1; }
+    .post-meta { display: flex; align-items: center; gap: 8px; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 11.5px; color: var(--text-3); }
+    .post-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--text-3); display: inline-block; }
+
+    /* Article */
+    .article { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 48px 52px; margin-bottom: 40px; }
+    @media (max-width: 600px) { .article { padding: 28px 20px; } .nav-links { display: none; } }
+    .article-tag { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+    .article h2 { font-size: clamp(22px, 4vw, 32px); font-weight: 700; line-height: 1.25; margin-bottom: 10px; color: var(--text); }
+    .article-meta { font-size: 13px; color: var(--text-3); margin-bottom: 28px; display: flex; align-items: center; gap: 8px; }
+    .article p { font-size: 15.5px; color: var(--text-2); margin-bottom: 18px; line-height: 1.75; }
+    .article h3 { font-size: 18px; font-weight: 700; color: var(--text); margin: 32px 0 12px; }
+    .article ul, .article ol { padding-left: 22px; margin-bottom: 18px; }
+    .article li { font-size: 15.5px; color: var(--text-2); margin-bottom: 8px; line-height: 1.7; }
+    .article li strong { color: var(--text); }
+
+    .code-block { background: #1e1e2e; border-radius: var(--radius); padding: 18px 20px; margin: 20px 0; overflow-x: auto; }
+    .code-block code { font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.6; color: #cdd6f4; display: block; }
+    .kw { color: #cba6f7; } .fn { color: #89b4fa; } .str { color: #a6e3a1; } .cm { color: #6c7086; }
+
+    .tip-box { background: var(--accent-light); border-left: 3px solid var(--accent); border-radius: 0 var(--radius) var(--radius) 0; padding: 14px 18px; margin: 24px 0; }
+    .tip-box p { color: var(--text-2); font-size: 14.5px; margin: 0; }
+    .tip-box strong { color: var(--accent); }
+
+    .steps { counter-reset: step; list-style: none; padding: 0; margin-bottom: 18px; }
+    .steps li { counter-increment: step; display: flex; gap: 14px; align-items: flex-start; margin-bottom: 16px; }
+    .steps li::before { content: counter(step); min-width: 28px; height: 28px; background: var(--accent); color: #fff; border-radius: 50%; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .steps li span { font-size: 15.5px; color: var(--text-2); line-height: 1.7; }
+    .steps li strong { color: var(--text); }
+
+    /* CTA */
+    .cta-banner { background: linear-gradient(135deg, #6152d8, #a78bfa); border-radius: var(--radius-lg); padding: 44px 40px; text-align: center; color: #fff; margin-bottom: 64px; }
+    .cta-banner h2 { font-size: 26px; margin-bottom: 10px; }
+    .cta-banner p { font-size: 15px; opacity: .88; margin-bottom: 24px; }
+    .cta-banner a { display: inline-block; background: #fff; color: var(--accent); padding: 11px 28px; border-radius: 10px; font-weight: 700; font-size: 14px; text-decoration: none; transition: transform .12s; }
+    .cta-banner a:hover { transform: translateY(-2px); }
+
+    /* Section label */
+    .section-label { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--text-3); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    /* Footer */
+    footer { background: var(--panel); border-top: 1px solid var(--border); padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-size: 12.5px; color: var(--text-3); }
+    footer a { color: var(--text-3); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+    .footer-links { display: flex; gap: 16px; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="index.html">&lt;/&gt; CodeHilite</a>
+    <div class="nav-links">
+      <a class="nav-link" href="index.html">App</a>
+      <a class="nav-link active" href="blog.html">Blog</a>
+      <a class="nav-link" href="about.html">About</a>
+      <a class="nav-link" href="contact.html">Contact</a>
+    </div>
+    <a class="nav-cta" href="index.html">Try Free →</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">Developer Tips &amp; Tutorials</div>
+  <h1>Make Your Code Look as Good<br>as It Works</h1>
+  <p>Guides, tips, and tricks for creating beautiful code snippet images that get noticed on social media, portfolios, and presentations.</p>
+  <a class="hero-btn" href="index.html">🎨 Open CodeHilite Free</a>
+</div>
+
+<main class="page">
+
+  <div class="section-label">Latest Articles</div>
+
+  <div class="posts-grid">
+    <a class="post-card" href="#social-media">
+      <div class="post-thumb" style="background:linear-gradient(135deg,#667eea,#764ba2)">📱</div>
+      <div class="post-body">
+        <div class="post-tag">Social Media</div>
+        <div class="post-title">How to Share Code on Twitter, LinkedIn &amp; Instagram</div>
+        <div class="post-excerpt">Stop pasting raw text. Turn your code into scroll-stopping images that developers actually engage with.</div>
+        <div class="post-meta"><span>5 min read</span><span class="post-dot"></span><span>Beginner</span></div>
+      </div>
+    </a>
+    <a class="post-card" href="#themes">
+      <div class="post-thumb" style="background:linear-gradient(135deg,#f093fb,#f5576c)">🎨</div>
+      <div class="post-body">
+        <div class="post-tag">Themes</div>
+        <div class="post-title">Best Syntax Highlighting Themes for Code Screenshots</div>
+        <div class="post-excerpt">From Dracula to GitHub Light — which themes make your code pop and which to avoid for screenshots.</div>
+        <div class="post-meta"><span>4 min read</span><span class="post-dot"></span><span>Intermediate</span></div>
+      </div>
+    </a>
+    <a class="post-card" href="#portfolio">
+      <div class="post-thumb" style="background:linear-gradient(135deg,#43e97b,#38f9d7)">💼</div>
+      <div class="post-body">
+        <div class="post-tag">Portfolio</div>
+        <div class="post-title">Level Up Your Developer Portfolio With Code Images</div>
+        <div class="post-excerpt">First impressions matter. Learn how professional devs use code images to make their portfolios stand out.</div>
+        <div class="post-meta"><span>6 min read</span><span class="post-dot"></span><span>All levels</span></div>
+      </div>
+    </a>
+    <a class="post-card" href="#export">
+      <div class="post-thumb" style="background:linear-gradient(135deg,#4facfe,#00f2fe)">📤</div>
+      <div class="post-body">
+        <div class="post-tag">Export</div>
+        <div class="post-title">PNG vs JPEG vs PDF — Which Format to Use?</div>
+        <div class="post-excerpt">Not all export formats are equal. Here's exactly when to use each one for the best quality result.</div>
+        <div class="post-meta"><span>3 min read</span><span class="post-dot"></span><span>Beginner</span></div>
+      </div>
+    </a>
+    <a class="post-card" href="#carbon">
+      <div class="post-thumb" style="background:linear-gradient(135deg,#fa709a,#fee140)">⚡</div>
+      <div class="post-body">
+        <div class="post-tag">Comparison</div>
+        <div class="post-title">CodeHilite vs Carbon vs Ray.so — Honest Comparison</div>
+        <div class="post-excerpt">We compared the top code-to-image tools so you don't have to. See how CodeHilite stacks up.</div>
+        <div class="post-meta"><span>7 min read</span><span class="post-dot"></span><span>All levels</span></div>
+      </div>
+    </a>
+    <a class="post-card" href="#teaching">
+      <div class="post-thumb" style="background:linear-gradient(135deg,#a18cd1,#fbc2eb)">🎓</div>
+      <div class="post-body">
+        <div class="post-tag">Teaching</div>
+        <div class="post-title">How to Use Code Images in Tutorials and Courses</div>
+        <div class="post-excerpt">Educators and content creators use CodeHilite to make lessons clearer and more professional-looking.</div>
+        <div class="post-meta"><span>5 min read</span><span class="post-dot"></span><span>Intermediate</span></div>
+      </div>
+    </a>
+  </div>
+
+  <!-- Article 1 -->
+  <article class="article" id="social-media">
+    <div class="article-tag">Social Media</div>
+    <h2>How to Share Code on Twitter, LinkedIn &amp; Instagram</h2>
+    <div class="article-meta">
+      <span>By Anmol Dubey</span><span class="post-dot" style="width:4px;height:4px;border-radius:50%;background:var(--text-3);display:inline-block"></span><span>5 min read</span>
+    </div>
+    <p>Developers share code every day — in tweets, LinkedIn updates, GitHub READMEs, and Slack messages. But pasting raw text is a missed opportunity. Formatted code images get significantly more engagement because they stop the scroll and look professional.</p>
+    <p>CodeHilite is a free, browser-based tool that turns any code snippet into a beautiful, shareable image in seconds — no account needed, no watermark.</p>
+    <h3>Step-by-step: From code to shareable image</h3>
+    <ol class="steps">
+      <li><span><strong>Paste your code</strong> into the editor on the left. CodeHilite auto-detects your language, or pick it manually from the dropdown.</span></li>
+      <li><span><strong>Choose a theme.</strong> For dark-mode audiences on Twitter, try Atom One Dark or Dracula. For LinkedIn, GitHub Light or VS look clean and professional.</span></li>
+      <li><span><strong>Set your background.</strong> Use white for a minimal look, or pick a gradient to make it visually striking. Gradients perform well on Instagram.</span></li>
+      <li><span><strong>Adjust card width.</strong> For Twitter, keep it under 600px. For LinkedIn posts, 700–800px looks great.</span></li>
+      <li><span><strong>Export as PNG</strong> — lossless, sharp on all screens, and supported everywhere.</span></li>
+    </ol>
+    <div class="tip-box">
+      <p><strong>💡 Pro tip:</strong> Turn on the Mac-style titlebar and set a descriptive filename like <code style="font-family:'JetBrains Mono',monospace;font-size:13px">api-handler.js</code> — it adds context and looks polished in social feeds.</p>
+    </div>
+    <h3>Platform-specific tips</h3>
+    <ul>
+      <li><strong>Twitter / X:</strong> Keep code short — 10–20 lines max. Dark themes perform well in night mode.</li>
+      <li><strong>LinkedIn:</strong> Wider cards with light themes look more corporate. Add a caption explaining what the code does.</li>
+      <li><strong>Instagram:</strong> Square crops work best. Bold gradient backgrounds pop in the feed. Use large font sizes (16–18px).</li>
+      <li><strong>GitHub README:</strong> Export as PNG and embed with <code style="font-family:'JetBrains Mono',monospace;font-size:13px">![alt](./screenshot.png)</code>. Use light themes to match GitHub's default look.</li>
+    </ul>
+    <div class="code-block"><code><span class="cm">// A clean snippet, ready to share</span>
+<span class="kw">const</span> <span class="fn">greet</span> = (<span class="fn">name</span>) =&gt; {
+  <span class="kw">return</span> <span class="str">`Hello, ${name}! 👋`</span>;
+};
+
+console.<span class="fn">log</span>(<span class="fn">greet</span>(<span class="str">'world'</span>)); <span class="cm">// Hello, world! 👋</span></code></div>
+  </article>
+
+  <!-- Article 2 -->
+  <article class="article" id="themes">
+    <div class="article-tag">Themes</div>
+    <h2>Best Syntax Highlighting Themes for Code Screenshots</h2>
+    <div class="article-meta">
+      <span>By Anmol Dubey</span><span class="post-dot" style="width:4px;height:4px;border-radius:50%;background:var(--text-3);display:inline-block"></span><span>4 min read</span>
+    </div>
+    <p>The theme you choose can make or break a code screenshot. Too dark and it disappears on a light background. Too busy and the syntax colours clash. Here's a breakdown of the best themes in CodeHilite and exactly when to use each one.</p>
+    <h3>Dark themes</h3>
+    <ul>
+      <li><strong>Atom One Dark</strong> — the most popular choice for social media. Muted tones, high readability, looks great on any background.</li>
+      <li><strong>Dracula</strong> — vibrant purples and pinks. Stands out on Instagram and in slide decks.</li>
+      <li><strong>Tokyo Night</strong> — cool blues and soft purples. Perfect for a clean, modern aesthetic.</li>
+      <li><strong>Nord</strong> — arctic colour palette, extremely readable. Great for documentation screenshots.</li>
+      <li><strong>Night Owl</strong> — designed for low-light reading, excellent colour contrast.</li>
+    </ul>
+    <h3>Light themes</h3>
+    <ul>
+      <li><strong>GitHub Light</strong> — the standard for tech content. Universally recognised, great for README embeds and blog posts.</li>
+      <li><strong>Visual Studio</strong> — clean and professional, ideal for LinkedIn and corporate tech content.</li>
+      <li><strong>Xcode</strong> — Apple-style syntax colours, great for Swift and iOS snippets.</li>
+      <li><strong>Solarized Light</strong> — warm tones, easy on the eyes, classic developer aesthetic.</li>
+    </ul>
+    <div class="tip-box">
+      <p><strong>💡 Pro tip:</strong> Match your background to your theme. Dark themes pair beautifully with deep gradient backgrounds. Light themes look sharpest on white or very light grey.</p>
+    </div>
+    <h3>Font pairing recommendations</h3>
+    <p>For the sharpest screenshots, use <strong>JetBrains Mono</strong> (default) or <strong>Fira Code</strong> — both render cleanly at any size. Avoid Courier New for screenshots as it can look pixelated at small sizes.</p>
+  </article>
+
+  <!-- Article 3 -->
+  <article class="article" id="portfolio">
+    <div class="article-tag">Portfolio</div>
+    <h2>Level Up Your Developer Portfolio With Code Images</h2>
+    <div class="article-meta">
+      <span>By Anmol Dubey</span><span class="post-dot" style="width:4px;height:4px;border-radius:50%;background:var(--text-3);display:inline-block"></span><span>6 min read</span>
+    </div>
+    <p>Your portfolio is your first impression. Recruiters and clients judge your attention to detail before they read a single line of code. Using beautifully formatted code images throughout your portfolio signals that you care about presentation — which often correlates with caring about code quality.</p>
+    <h3>Where to use code images in your portfolio</h3>
+    <ul>
+      <li><strong>Project cards:</strong> Show a key function or algorithm from each project instead of a plain UI screenshot.</li>
+      <li><strong>About / Skills section:</strong> Display a snippet in your primary language to immediately establish credibility.</li>
+      <li><strong>Case studies:</strong> Walk through your solution with annotated code images — use the line highlight feature to draw attention to the important parts.</li>
+      <li><strong>GitHub profile README:</strong> Embed a code image as a hero graphic at the top of your README.</li>
+      <li><strong>CV / résumé PDF:</strong> Export your best snippet as a small image and drop it into your CV header.</li>
+    </ul>
+    <div class="tip-box">
+      <p><strong>💡 Pro tip:</strong> Use the <strong>Highlight Lines</strong> feature in CodeHilite to draw attention to a specific part of your code. It's subtle but powerful — great for case studies where you want to explain a particular decision.</p>
+    </div>
+    <h3>The 3-snippet portfolio formula</h3>
+    <p>You don't need to show everything. Pick three snippets that show range: one showing your <strong>problem-solving ability</strong>, one showing your <strong>code style</strong>, and one showing <strong>domain knowledge</strong>. Export all three with a consistent theme and background for visual coherence.</p>
+  </article>
+
+  <!-- Article 4 -->
+  <article class="article" id="export">
+    <div class="article-tag">Export</div>
+    <h2>PNG vs JPEG vs PDF — Which Format Should You Use?</h2>
+    <div class="article-meta">
+      <span>By Anmol Dubey</span><span class="post-dot" style="width:4px;height:4px;border-radius:50%;background:var(--text-3);display:inline-block"></span><span>3 min read</span>
+    </div>
+    <p>CodeHilite lets you export in five formats: PNG, JPEG, PDF, HTML, and plain text. Here's exactly when to use each one.</p>
+    <h3>PNG — Use this 90% of the time</h3>
+    <p>PNG is lossless, meaning the image stays perfectly sharp at any size. Use PNG for social media posts, embedding in websites, GitHub READMEs, and Notion pages. It also supports transparent backgrounds, which is useful for placing your snippet over a custom background in a design tool.</p>
+    <h3>JPEG — Only for photographic contexts</h3>
+    <p>JPEG compresses images and can blur sharp text edges. Avoid it for code screenshots unless file size is a hard constraint. If you're embedding in a large PDF where image quality is less critical, JPEG can reduce file size significantly.</p>
+    <h3>PDF — For documents and print</h3>
+    <p>Export as PDF when your snippet is going into a report, academic paper, or printable document. The PDF export produces a clean result that prints crisply at any resolution.</p>
+    <h3>HTML — For embedding on webpages</h3>
+    <p>The HTML export gives you a self-contained file with syntax highlighting intact — useful if you want to embed a live, selectable code block on a webpage without JavaScript dependencies.</p>
+    <div class="tip-box">
+      <p><strong>💡 Bottom line:</strong> When in doubt, use <strong>PNG</strong>. It looks the best, is universally supported, and preserves every pixel exactly as it appeared in the preview.</p>
+    </div>
+  </article>
+
+  <!-- Article 5 -->
+  <article class="article" id="carbon">
+    <div class="article-tag">Comparison</div>
+    <h2>CodeHilite vs Carbon vs Ray.so — Honest Comparison</h2>
+    <div class="article-meta">
+      <span>By Anmol Dubey</span><span class="post-dot" style="width:4px;height:4px;border-radius:50%;background:var(--text-3);display:inline-block"></span><span>7 min read</span>
+    </div>
+    <p>There are several tools for turning code into images. Carbon, Ray.so, Codeimg, and Showcode are the most well-known. Here's how CodeHilite compares — and where it wins.</p>
+    <h3>CodeHilite advantages</h3>
+    <ul>
+      <li><strong>No account required.</strong> Open the URL, paste your code, export. That's it.</li>
+      <li><strong>Multiple export formats.</strong> PNG, JPEG, PDF, HTML, and plain text — most alternatives only offer PNG.</li>
+      <li><strong>Line highlighting.</strong> Draw attention to specific lines with a subtle background highlight — great for tutorials.</li>
+      <li><strong>Snippet saving.</strong> Save and reload your snippets within a session without any backend or login.</li>
+      <li><strong>File upload.</strong> Drag and drop a source file directly onto the editor — language is auto-detected.</li>
+      <li><strong>Fully free.</strong> No paywalled themes, no watermarks, no premium tier.</li>
+    </ul>
+    <h3>When to use alternatives</h3>
+    <p>Carbon is a solid choice if you want a very minimal interface and only need PNG. Ray.so has excellent default aesthetics if you don't want to customise. But for developers who want control — typography, padding, line numbers, highlight lines, and multiple export formats — CodeHilite gives you more in a single free tool.</p>
+  </article>
+
+  <!-- Article 6 -->
+  <article class="article" id="teaching">
+    <div class="article-tag">Teaching</div>
+    <h2>How to Use Code Images in Tutorials and Online Courses</h2>
+    <div class="article-meta">
+      <span>By Anmol Dubey</span><span class="post-dot" style="width:4px;height:4px;border-radius:50%;background:var(--text-3);display:inline-block"></span><span>5 min read</span>
+    </div>
+    <p>If you create programming tutorials, YouTube videos, blog posts, or online courses, code images are one of your most powerful visual tools. They're clearer than a raw IDE screenshot, easier to annotate, and look professional even at low video resolutions.</p>
+    <h3>Why code images beat IDE screenshots for teaching</h3>
+    <ul>
+      <li><strong>No visual noise.</strong> IDE screenshots include toolbars, file trees, and notifications. Code images focus 100% on the code.</li>
+      <li><strong>Consistent appearance.</strong> Your screenshots look the same regardless of which OS or IDE a student has.</li>
+      <li><strong>Highlight what matters.</strong> Use CodeHilite's line-highlight feature to visually emphasise the line you're explaining.</li>
+      <li><strong>High contrast for video.</strong> Dark themes with large fonts (16–18px) remain readable even on compressed YouTube video.</li>
+    </ul>
+    <h3>Recommended settings for tutorial creators</h3>
+    <ul>
+      <li><strong>Font size:</strong> 15–18px — readable in video thumbnails and at lower resolutions</li>
+      <li><strong>Theme:</strong> Atom One Dark or Night Owl for video; GitHub Light for blog posts</li>
+      <li><strong>Card width:</strong> 700–800px for 16:9 slides; 560px for blog post embeds</li>
+      <li><strong>Line numbers:</strong> On — they help students follow along ("look at line 7")</li>
+      <li><strong>Shadow:</strong> Soft or Mid — adds depth when placed on a slide background</li>
+    </ul>
+    <div class="tip-box">
+      <p><strong>💡 Pro tip:</strong> Create a standard set of settings for your course — same theme, font, and size throughout. Consistent styling across all your code images gives your content a polished, professional brand.</p>
+    </div>
+  </article>
+
+  <!-- CTA -->
+  <div class="cta-banner">
+    <h2>Ready to make your code beautiful?</h2>
+    <p>Free, instant, no account needed. Paste your code and export in seconds.</p>
+    <a href="index.html">Open CodeHilite →</a>
+  </div>
+
+</main>
+
+<footer>
+  <span>© <script>document.write(new Date().getFullYear())</script> <a href="index.html">CodeHilite</a> by Anmol Dubey</span>
+  <div class="footer-links">
+    <a href="index.html">App</a>
+    <a href="blog.html">Blog</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="privacy-policy.html">Privacy</a>
+  </div>
+</footer>
+
+</body>
+</html>
