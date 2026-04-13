@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — CodeHilite</title>
+
+<!-- Primary Meta Tags -->
+<meta name="title" content="Privacy Policy — CodeHilite">
+<meta name="description" content="CodeHilite's privacy policy. We collect no personal data. Your code never leaves your browser.">
+<meta name="author" content="Anmol Dubey">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://codehilite.xyz/privacy-policy.html">
+<meta property="og:title" content="Privacy Policy — CodeHilite">
+<meta property="og:description" content="CodeHilite's privacy policy. We collect no personal data. Your code never leaves your browser.">
+<meta property="og:site_name" content="CodeHilite">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Privacy Policy — CodeHilite">
+<meta name="twitter:description" content="CodeHilite's privacy policy. We collect no personal data. Your code never leaves your browser.">
+
+<link rel="canonical" href="https://codehilite.xyz/privacy-policy.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f1f3f9;--panel:#ffffff;--surface:#f8f9fc;--surface2:#eef0f7;--surface3:#e4e7f0;
+  --border:rgba(0,0,0,0.07);--border-med:rgba(0,0,0,0.12);
+  --text:#0f1117;--text-2:#4b5280;--text-3:#9097b8;
+  --accent:#6152d8;--accent-2:#7c6ef6;--accent-glow:rgba(97,82,216,0.12);
+  --green:#16a34a;
+  --radius:8px;--radius-lg:12px;--radius-xl:16px;
+}
+html,body{min-height:100%;font-family:'Outfit',system-ui,sans-serif;background:var(--bg);color:var(--text)}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:var(--surface3);border-radius:99px}
+
+nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:10px;padding:0 24px;height:52px;background:var(--panel);border-bottom:1px solid var(--border)}
+.logo{font-size:17px;font-weight:700;letter-spacing:-.5px;color:var(--accent);display:flex;align-items:center;gap:6px;text-decoration:none}
+.logo-bracket{color:var(--text-3);font-weight:300}
+.logo-dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.nav-links{display:flex;gap:4px;margin-left:auto;align-items:center}
+.nav-link{padding:5px 12px;border-radius:var(--radius);font-size:13px;font-weight:500;color:var(--text-2);text-decoration:none;transition:all .12s}
+.nav-link:hover{background:var(--surface2);color:var(--text)}
+.nav-link.active{color:var(--accent);background:var(--accent-glow)}
+.nav-cta{padding:6px 14px;border-radius:var(--radius);font-size:13px;font-weight:600;background:var(--accent);color:#fff;text-decoration:none;transition:opacity .12s;margin-left:6px}
+.nav-cta:hover{opacity:.88}
+
+main{max-width:720px;margin:0 auto;padding:56px 24px 96px}
+
+/* Header */
+.page-header{margin-bottom:48px;padding-bottom:32px;border-bottom:1px solid var(--border-med)}
+.eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.eyebrow-dot{width:5px;height:5px;border-radius:50%;background:var(--accent)}
+h1{font-size:clamp(26px,4vw,40px);font-weight:700;letter-spacing:-1px;margin-bottom:12px}
+.meta{font-size:13px;color:var(--text-3)}
+
+/* TL;DR banner */
+.tldr{
+  background:var(--accent-glow);border:1px solid rgba(97,82,216,.2);
+  border-radius:var(--radius-lg);padding:20px 22px;margin-bottom:40px;
+  display:flex;gap:14px;align-items:flex-start;
+}
+.tldr-icon{font-size:22px;flex-shrink:0;margin-top:1px}
+.tldr-body strong{display:block;font-size:14.5px;font-weight:700;color:var(--accent);margin-bottom:5px}
+.tldr-body p{font-size:13.5px;color:var(--text-2);line-height:1.65;margin:0}
+
+/* Sections */
+.section{margin-bottom:40px}
+h2{font-size:19px;font-weight:700;letter-spacing:-.3px;margin-bottom:10px;padding-top:8px}
+p{font-size:15px;line-height:1.8;color:var(--text-2);margin-bottom:10px}
+p:last-child{margin-bottom:0}
+ul{margin:10px 0 10px 18px}
+li{font-size:15px;line-height:1.8;color:var(--text-2);margin-bottom:4px}
+a.inline{color:var(--accent);text-decoration:none;font-weight:500}
+a.inline:hover{text-decoration:underline}
+
+/* Table of contents */
+.toc{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px 22px;margin-bottom:40px}
+.toc h3{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:12px}
+.toc ol{margin:0;padding-left:18px}
+.toc li{margin-bottom:6px}
+.toc a{font-size:14px;color:var(--text-2);text-decoration:none;transition:color .12s}
+.toc a:hover{color:var(--accent)}
+
+/* Section divider */
+.divider{height:1px;background:var(--border);margin:36px 0}
+
+/* Highlight box */
+.highlight-box{background:var(--surface2);border-radius:var(--radius);padding:14px 16px;margin:14px 0}
+.highlight-box p{font-size:13.5px;margin:0;color:var(--text-2)}
+
+footer{border-top:1px solid var(--border);padding:22px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:12.5px;color:var(--text-3)}
+footer a{color:var(--text-3);text-decoration:none}
+footer a:hover{color:var(--accent)}
+.footer-links{display:flex;gap:16px}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">
+    <span class="logo-bracket">&lt;</span>Code<span style="color:var(--accent-2)">Hilite</span><span class="logo-bracket">/&gt;</span>
+    <div class="logo-dot"></div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">App</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+    <a href="index.html" class="nav-cta">Open App →</a>
+  </div>
+</nav>
+
+<main>
+
+  <div class="page-header">
+    <div class="eyebrow"><div class="eyebrow-dot"></div>Legal</div>
+    <h1>Privacy Policy</h1>
+    <p class="meta">Last updated: <span id="last-updated"></span> &nbsp;·&nbsp; Effective immediately</p>
+  </div>
+
+  <div class="tldr">
+    <div class="tldr-icon">🔒</div>
+    <div class="tldr-body">
+      <strong>Short version: we collect nothing.</strong>
+      <p>CodeHilite runs entirely in your browser. Your code, settings, and snippets never leave your device. We don't use cookies, trackers, or analytics. There is nothing to collect and nowhere to send it.</p>
+    </div>
+  </div>
+
+  <div class="toc">
+    <h3>Contents</h3>
+    <ol>
+      <li><a href="#who-we-are">Who we are</a></li>
+      <li><a href="#data-collected">What data we collect</a></li>
+      <li><a href="#your-code">Your code &amp; snippets</a></li>
+      <li><a href="#third-parties">Third-party services</a></li>
+      <li><a href="#cookies">Cookies &amp; local storage</a></li>
+      <li><a href="#contact-form">Contact form data</a></li>
+      <li><a href="#your-rights">Your rights</a></li>
+      <li><a href="#changes">Changes to this policy</a></li>
+      <li><a href="#contact">Contact us</a></li>
+    </ol>
+  </div>
+
+  <!-- 1 -->
+  <div class="section" id="who-we-are">
+    <h2>1. Who we are</h2>
+    <p>CodeHilite is a free tool created by <strong>Anmol Dubey</strong> ("we", "us", "our"). The service is available at <strong>codehilite.xyz</strong>.</p>
+    <p>This Privacy Policy explains how we handle information when you use CodeHilite.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 2 -->
+  <div class="section" id="data-collected">
+    <h2>2. What data we collect</h2>
+    <p><strong>We collect no personal data.</strong> CodeHilite has no user accounts, no login, no sign-up, and no backend server that processes your requests.</p>
+    <p>We do not collect, store, or process:</p>
+    <ul>
+      <li>Names, email addresses, or any identifying information</li>
+      <li>IP addresses or device identifiers</li>
+      <li>Usage statistics or behavioural data</li>
+      <li>Crash reports or error logs</li>
+    </ul>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 3 -->
+  <div class="section" id="your-code">
+    <h2>3. Your code &amp; snippets</h2>
+    <p>All code you type or paste into CodeHilite is processed <strong>entirely within your browser</strong>. It is never transmitted to any server — ours or anyone else's.</p>
+    <p>Snippets saved within a session are held in memory only and are lost when you close or refresh the page. Nothing is written to your device's permanent storage unless you explicitly download an export file.</p>
+    <div class="highlight-box"><p>💡 Even if someone intercepted your network traffic while using CodeHilite, they would see nothing — because no code-related data ever travels over the network.</p></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 4 -->
+  <div class="section" id="third-parties">
+    <h2>4. Third-party services</h2>
+    <p>CodeHilite loads a small number of resources from trusted CDNs. These requests may expose your IP address to the CDN provider as part of normal HTTP operation:</p>
+    <ul>
+      <li><strong>Google Fonts</strong> (fonts.googleapis.com) — loads Outfit and JetBrains Mono typefaces</li>
+      <li><strong>cdnjs.cloudflare.com</strong> — loads highlight.js, html2canvas, and jsPDF libraries</li>
+    </ul>
+    <p>We do not control these third parties and encourage you to review their respective privacy policies. If you prefer, you can self-host the fonts and libraries and serve the HTML file locally — all functionality will still work.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 5 -->
+  <div class="section" id="cookies">
+    <h2>5. Cookies &amp; local storage</h2>
+    <p>CodeHilite does <strong>not</strong> set any cookies. We do not use localStorage, sessionStorage, or any other persistent browser storage mechanism to store your data.</p>
+    <p>No consent banner is shown because there is genuinely nothing to consent to.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 6 -->
+  <div class="section" id="contact-form">
+    <h2>6. Contact form data</h2>
+    <p>If you choose to contact us via the form on the Contact page, your message (including name, email address, and message content) will be submitted to our form processing provider and forwarded to our email inbox.</p>
+    <p>This data is used solely to respond to your enquiry and is not shared with third parties, used for marketing, or retained beyond what is necessary to reply.</p>
+    <p>You are never required to contact us — it is entirely optional.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 7 -->
+  <div class="section" id="your-rights">
+    <h2>7. Your rights</h2>
+    <p>Because we hold no personal data about you, there is nothing to access, correct, or delete. If you submitted a contact form and wish to have that message deleted from our records, <a href="contact.html" class="inline">contact us</a> and we will do so promptly.</p>
+    <p>If you are located in the UK or EU, you have rights under the UK GDPR and GDPR respectively. Since we hold no personal data, those rights are satisfied by default. For contact-form data, the same rights apply and can be exercised by emailing us.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 8 -->
+  <div class="section" id="changes">
+    <h2>8. Changes to this policy</h2>
+    <p>If we ever change how data is handled, we will update this page and revise the "Last updated" date at the top. Since the tool collects no data, significant changes are unlikely.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 9 -->
+  <div class="section" id="contact">
+    <h2>9. Contact us</h2>
+    <p>If you have any questions about this Privacy Policy, please reach out:</p>
+    <ul>
+      <li>Email: <a href="mailto:anmolbeyco@gmail.com" class="inline">anmolbeyco@gmail.com</a></li>
+      <li>Contact form: <a href="contact.html" class="inline">codehilite/contact</a></li>
+    </ul>
+  </div>
+
+</main>
+
+<footer>
+  <span>© <span id="yr"></span> CodeHilite. All rights reserved.</span>
+  <div class="footer-links">
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="privacy-policy.html">Privacy</a>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  // Show the current date as "last updated"
+  const d = new Date();
+  document.getElementById('last-updated').textContent =
+    d.toLocaleDateString('en-GB', {day:'numeric', month:'long', year:'numeric'});
+</script>
+</body>
+</html>

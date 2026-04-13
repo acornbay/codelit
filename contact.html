@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — CodeHilite</title>
+
+<!-- Primary Meta Tags -->
+<meta name="title" content="Contact — CodeHilite">
+<meta name="description" content="Get in touch with the CodeHilite team. Report bugs, request features, or just say hello.">
+<meta name="keywords" content="CodeHilite contact, support, feedback, bug report, feature request">
+<meta name="author" content="Anmol Dubey">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://codehilite.xyz/contact.html">
+<meta property="og:title" content="Contact — CodeHilite">
+<meta property="og:description" content="Get in touch with the CodeHilite team. Report bugs, request features, or just say hello.">
+<meta property="og:site_name" content="CodeHilite">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Contact — CodeHilite">
+<meta name="twitter:description" content="Get in touch with the CodeHilite team. Report bugs, request features, or just say hello.">
+
+<link rel="canonical" href="https://codehilite.xyz/contact.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f1f3f9;--panel:#ffffff;--surface:#f8f9fc;--surface2:#eef0f7;--surface3:#e4e7f0;
+  --border:rgba(0,0,0,0.07);--border-med:rgba(0,0,0,0.12);--border-strong:rgba(0,0,0,0.22);
+  --text:#0f1117;--text-2:#4b5280;--text-3:#9097b8;
+  --accent:#6152d8;--accent-2:#7c6ef6;--accent-glow:rgba(97,82,216,0.12);
+  --green:#16a34a;--red:#dc2626;
+  --radius:8px;--radius-lg:12px;--radius-xl:16px;
+}
+html,body{min-height:100%;font-family:'Outfit',system-ui,sans-serif;background:var(--bg);color:var(--text)}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:var(--surface3);border-radius:99px}
+
+nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:10px;padding:0 24px;height:52px;background:var(--panel);border-bottom:1px solid var(--border)}
+.logo{font-size:17px;font-weight:700;letter-spacing:-.5px;color:var(--accent);display:flex;align-items:center;gap:6px;text-decoration:none}
+.logo-bracket{color:var(--text-3);font-weight:300}
+.logo-dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.nav-links{display:flex;gap:4px;margin-left:auto;align-items:center}
+.nav-link{padding:5px 12px;border-radius:var(--radius);font-size:13px;font-weight:500;color:var(--text-2);text-decoration:none;transition:all .12s}
+.nav-link:hover{background:var(--surface2);color:var(--text)}
+.nav-link.active{color:var(--accent);background:var(--accent-glow)}
+.nav-cta{padding:6px 14px;border-radius:var(--radius);font-size:13px;font-weight:600;background:var(--accent);color:#fff;text-decoration:none;transition:opacity .12s;margin-left:6px}
+.nav-cta:hover{opacity:.88}
+
+main{max-width:680px;margin:0 auto;padding:64px 24px 96px}
+
+.hero{margin-bottom:48px}
+.eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.eyebrow-dot{width:5px;height:5px;border-radius:50%;background:var(--accent)}
+h1{font-size:clamp(28px,4.5vw,44px);font-weight:700;letter-spacing:-1.2px;line-height:1.15;margin-bottom:14px}
+h1 span{color:var(--accent)}
+.lead{font-size:16px;line-height:1.75;color:var(--text-2)}
+
+/* Contact card */
+.contact-card{
+  background:var(--panel);border:1px solid var(--border-med);
+  border-radius:var(--radius-xl);padding:36px;margin-bottom:24px;
+}
+.contact-card h2{font-size:17px;font-weight:700;margin-bottom:6px}
+.contact-card p{font-size:14px;color:var(--text-2);line-height:1.7;margin-bottom:20px}
+
+/* Form */
+.form-group{margin-bottom:18px}
+label{display:block;font-size:12.5px;font-weight:600;color:var(--text-2);margin-bottom:6px;letter-spacing:.02em}
+input[type=text],input[type=email],textarea,select{
+  width:100%;padding:10px 13px;
+  background:var(--surface);border:1px solid var(--border-med);
+  color:var(--text);border-radius:var(--radius);
+  font-size:14px;font-family:'Outfit',sans-serif;
+  outline:none;transition:border-color .15s,box-shadow .15s;
+  resize:none;
+}
+input[type=text]:focus,input[type=email]:focus,textarea:focus,select:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px var(--accent-glow);
+}
+input::placeholder,textarea::placeholder{color:var(--text-3)}
+textarea{min-height:130px;line-height:1.6}
+
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:500px){.form-row{grid-template-columns:1fr}}
+
+.submit-btn{
+  width:100%;padding:12px;border-radius:var(--radius-lg);
+  font-size:14.5px;font-weight:600;font-family:'Outfit',sans-serif;
+  background:var(--accent);color:#fff;border:none;cursor:pointer;
+  transition:opacity .12s,transform .1s;
+}
+.submit-btn:hover{opacity:.88}
+.submit-btn:active{transform:scale(.99)}
+.submit-btn:disabled{opacity:.5;cursor:not-allowed}
+
+/* Toast feedback */
+.form-feedback{
+  display:none;align-items:center;gap:8px;
+  padding:12px 16px;border-radius:var(--radius-lg);
+  font-size:13.5px;font-weight:500;margin-top:14px;
+}
+.form-feedback.ok{display:flex;background:#f0fdf4;border:1px solid #bbf7d0;color:var(--green)}
+.form-feedback.err{display:flex;background:#fef2f2;border:1px solid #fecaca;color:var(--red)}
+
+/* Alternatives */
+.alt-section{margin-top:32px}
+.alt-section h3{font-size:15px;font-weight:700;margin-bottom:14px}
+.alt-links{display:flex;flex-direction:column;gap:10px}
+.alt-link{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 16px;border-radius:var(--radius-lg);
+  background:var(--panel);border:1px solid var(--border);
+  text-decoration:none;color:var(--text);
+  transition:border-color .14s,box-shadow .14s;
+}
+.alt-link:hover{border-color:rgba(97,82,216,.3);box-shadow:0 2px 12px var(--accent-glow)}
+.alt-icon{width:36px;height:36px;border-radius:var(--radius);background:var(--accent-glow);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.alt-info strong{display:block;font-size:13.5px;font-weight:600;margin-bottom:2px}
+.alt-info span{font-size:12px;color:var(--text-3)}
+
+footer{border-top:1px solid var(--border);padding:22px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:12.5px;color:var(--text-3)}
+footer a{color:var(--text-3);text-decoration:none}
+footer a:hover{color:var(--accent)}
+.footer-links{display:flex;gap:16px}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">
+    <span class="logo-bracket">&lt;</span>Code<span style="color:var(--accent-2)">Hilite</span><span class="logo-bracket">/&gt;</span>
+    <div class="logo-dot"></div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">App</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="contact.html" class="nav-link active">Contact</a>
+    <a href="index.html" class="nav-cta">Open App →</a>
+  </div>
+</nav>
+
+<main>
+
+  <div class="hero">
+    <div class="eyebrow"><div class="eyebrow-dot"></div>Contact</div>
+    <h1>Let's <span>talk</span></h1>
+    <p class="lead">Found a bug? Have a feature idea? Or just want to say hello? Drop a message — responses usually come within a day or two.</p>
+  </div>
+
+  <div class="contact-card">
+    <h2>Send a message</h2>
+    <p>Fill out the form below and it'll go straight to the inbox. Replace the action URL with your preferred form handler (Formspree, Netlify Forms, etc.).</p>
+
+    <!-- Replace action with your form endpoint e.g. https://formspree.io/f/YOUR_ID -->
+    <form id="contact-form" action="https://formspree.io/f/xlgarkaw" method="POST">
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name" placeholder="Jane Smith" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Your email</label>
+          <input type="email" id="email" name="email" placeholder="jane@example.com" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="subject">Subject</label>
+        <select id="subject" name="subject">
+          <option value="bug">🐛 Bug report</option>
+          <option value="feature">💡 Feature request</option>
+          <option value="question">❓ General question</option>
+          <option value="other">👋 Just saying hi</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Tell me what's on your mind…" required></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn" id="submit-btn">Send message →</button>
+
+      <div class="form-feedback ok" id="feedback-ok">
+        ✅ Message sent! I'll get back to you soon.
+      </div>
+      <div class="form-feedback err" id="feedback-err">
+        ❌ Something went wrong. Please try emailing directly.
+      </div>
+    </form>
+  </div>
+
+  <div class="alt-section">
+    <h3>Other ways to reach me</h3>
+    <div class="alt-links">
+      <a href="mailto:anmolbeyco@gmail.com" class="alt-link">
+        <div class="alt-icon">✉️</div>
+        <div class="alt-info">
+          <strong>Email directly</strong>
+          <span>anmolbeyco@gmail.com</span>
+        </div>
+      </a>
+      <a href="https://github.com/acornbay" target="_blank" rel="noopener" class="alt-link">
+        <div class="alt-icon">🐙</div>
+        <div class="alt-info">
+          <strong>GitHub</strong>
+          <span>Open an issue or browse the source</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <span>© <span id="yr"></span> CodeHilite. All rights reserved.</span>
+  <div class="footer-links">
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="privacy-policy.html">Privacy</a>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// Intercept form submit for AJAX (works with Formspree)
+const form = document.getElementById('contact-form');
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+  document.getElementById('feedback-ok').classList.remove('ok');
+  document.getElementById('feedback-err').classList.remove('err');
+
+  try {
+    const res = await fetch(form.action, {
+      method: 'POST',
+      headers: {'Accept': 'application/json'},
+      body: new FormData(form),
+    });
+    if (res.ok) {
+      document.getElementById('feedback-ok').classList.add('ok');
+      form.reset();
+    } else {
+      throw new Error('non-ok response');
+    }
+  } catch(_) {
+    document.getElementById('feedback-err').classList.add('err');
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Send message →';
+});
+</script>
+</body>
+</html>
