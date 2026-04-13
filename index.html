@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2877940277070561"
+  <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2877940277070561"
      crossorigin="anonymous"></script>
-  <meta name="google-adsense-account" content="ca-pub-2877940277070561">
+    <meta name="google-adsense-account" content="ca-pub-2877940277070561">
+  <head>
+  
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CodeHilite — Beautiful Code Snippets</title>
@@ -83,6 +86,24 @@ html,body{height:100%;font-family:'Outfit',system-ui,sans-serif;background:var(-
 }
 .logo-bracket{color:var(--text-3);font-weight:300}
 .logo-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);margin-left:2px}
+
+.nav-page-links{display:flex;gap:2px;flex-shrink:0}
+.nav-page-link{
+  padding:4px 10px;border-radius:var(--radius);
+  font-size:12px;font-weight:500;color:var(--text-3);
+  text-decoration:none;transition:all .12s;white-space:nowrap;
+}
+.nav-page-link:hover{background:var(--surface2);color:var(--text)}
+
+.app-footer{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 16px;height:30px;flex-shrink:0;
+  background:var(--panel);border-top:1px solid var(--border);
+  font-size:11px;color:var(--text-3);
+}
+.app-footer a{color:var(--text-3);text-decoration:none;transition:color .12s}
+.app-footer a:hover{color:var(--accent)}
+.footer-links{display:flex;gap:14px}
 
 .header-sep{width:1px;height:20px;background:var(--border-med);flex-shrink:0}
 .header-spacer{flex:1}
@@ -469,6 +490,11 @@ input[type=color]{
       <div class="logo-dot"></div>
     </div>
     <div class="header-sep"></div>
+    <nav class="nav-page-links">
+      <a href="about.html" class="nav-page-link">About</a>
+      <a href="contact.html" class="nav-page-link">Contact</a>
+    </nav>
+    <div class="header-sep"></div>
     <input class="title-field" id="snippet-title" placeholder="untitled-snippet" value="my-snippet" spellcheck="false">
     <div class="header-spacer"></div>
 
@@ -583,10 +609,6 @@ input[type=color]{
             <span class="form-label">Width</span>
             <input type="range" id="card-width" min="280" max="960" value="560" step="10">
             <span class="val-badge" id="cw-val">560</span>
-          </div>
-          <div class="toggle-row">
-            <span class="toggle-label">Show titlebar</span>
-            <label class="toggle"><input type="checkbox" id="show-titlebar" checked><span class="toggle-track"></span></label>
           </div>
           <div class="toggle-row">
             <span class="toggle-label">Show line numbers</span>
@@ -751,15 +773,6 @@ input[type=color]{
 
       <div class="preview-canvas" id="preview-canvas">
         <div id="code-card">
-          <div class="card-titlebar" id="card-titlebar">
-            <div class="mac-dots">
-              <div class="mac-dot" style="background:#ff5f57"></div>
-              <div class="mac-dot" style="background:#febc2e"></div>
-              <div class="mac-dot" style="background:#28c840"></div>
-            </div>
-            <div class="card-filename" id="card-filename">my-snippet.js</div>
-            <div class="card-lang-badge" id="card-lang-badge">js</div>
-          </div>
           <div class="card-body">
             <div id="line-nums"></div>
             <div id="code-display-wrap" style="padding:16px">
@@ -771,6 +784,16 @@ input[type=color]{
     </section>
 
   </div><!-- .main -->
+
+  <footer class="app-footer">
+    <span>© <script>document.write(new Date().getFullYear())</script> <a href="about.html">CodeHilite</a> by Anmol Dubey</span>
+    <div class="footer-links">
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy-policy.html">Privacy</a>
+    </div>
+  </footer>
+
 </div><!-- .app -->
 
 <!-- ══ SNIPPETS MODAL ══ -->
@@ -932,7 +955,6 @@ function applyStyles() {
   card.style.boxShadow = S.shadow;
   card.style.overflow = 'hidden';
 
-  $('card-titlebar').style.display = S.showTitlebar ? 'flex' : 'none';
   // filename is updated by highlight(), skip here to avoid overwriting with .txt
 
   const pad = S.padding;
@@ -1055,11 +1077,7 @@ ${hljsCSS}
   box-shadow:${S.shadow||'none'};
   display:inline-block;
 }
-.titlebar{
-  display:${S.showTitlebar?'flex':'none'};
-  align-items:center;gap:8px;
-  padding:11px 16px 11px 14px;
-}
+.titlebar{display:none}
 .dots{display:flex;gap:6px}
 .dot{width:11px;height:11px;border-radius:50%}
 .fname{font-size:12.5px;font-weight:500;opacity:.6;font-family:'Outfit',sans-serif;margin-left:4px}
@@ -1215,8 +1233,7 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;
 .card{width:${S.cardWidth}px;border-radius:${S.borderRadius}px;
   overflow:hidden;box-shadow:${S.shadow || 'none'};
   background:rgba(0,0,0,.25);}
-.titlebar{display:${S.showTitlebar ? 'flex' : 'none'};align-items:center;
-  gap:8px;padding:11px 16px;}
+.titlebar{display:none;}
 .dots{display:flex;gap:6px}
 .dot{width:11px;height:11px;border-radius:50%}
 .fname{font-size:12.5px;font-weight:500;opacity:.6;margin-left:4px}
@@ -1422,7 +1439,6 @@ sliders.forEach(([id, valId, unit, fn]) => {
 
 // Toggles
 [
-  ['show-titlebar', v => S.showTitlebar = v],
   ['show-linenums', v => { S.showLineNums = v; refreshLineNums($('code-editor').value); }],
   ['word-wrap', v => S.wordWrap = v],
   ['show-lang-badge', v => { S.showLangBadge = v; applyStyles(); }],
