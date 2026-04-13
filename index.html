@@ -611,6 +611,10 @@ input[type=color]{
             <span class="val-badge" id="cw-val">560</span>
           </div>
           <div class="toggle-row">
+            <span class="toggle-label">Show titlebar</span>
+            <label class="toggle"><input type="checkbox" id="show-titlebar" checked><span class="toggle-track"></span></label>
+          </div>
+          <div class="toggle-row">
             <span class="toggle-label">Show line numbers</span>
             <label class="toggle"><input type="checkbox" id="show-linenums" checked><span class="toggle-track"></span></label>
           </div>
@@ -628,7 +632,7 @@ input[type=color]{
         <div class="sidebar-sec">
           <div class="sec-label">Background</div>
           <div class="bg-grid" id="bg-grid">
-            <div class="bg-swatch active" data-bg="linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%)" style="background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460)"></div>
+            <div class="bg-swatch" data-bg="linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%)" style="background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460)"></div>
             <div class="bg-swatch" data-bg="linear-gradient(135deg,#667eea 0%,#764ba2 100%)" style="background:linear-gradient(135deg,#667eea,#764ba2)"></div>
             <div class="bg-swatch" data-bg="linear-gradient(135deg,#f093fb 0%,#f5576c 100%)" style="background:linear-gradient(135deg,#f093fb,#f5576c)"></div>
             <div class="bg-swatch" data-bg="linear-gradient(135deg,#4facfe 0%,#00f2fe 100%)" style="background:linear-gradient(135deg,#4facfe,#00f2fe)"></div>
@@ -637,7 +641,8 @@ input[type=color]{
             <div class="bg-swatch" data-bg="linear-gradient(135deg,#a18cd1 0%,#fbc2eb 100%)" style="background:linear-gradient(135deg,#a18cd1,#fbc2eb)"></div>
             <div class="bg-swatch" data-bg="linear-gradient(135deg,#2d1b69 0%,#11998e 100%)" style="background:linear-gradient(135deg,#2d1b69,#11998e)"></div>
             <div class="bg-swatch" data-bg="#0d1117" style="background:#0d1117;border:1px solid #333"></div>
-            <div class="bg-swatch" data-bg="#f8f9fc" style="background:#f8f9fc;border:1px solid #dde"></div>
+            <div class="bg-swatch active" data-bg="#f8f9fc" style="background:#f8f9fc;border:1px solid #dde"></div>
+            <div class="bg-swatch" data-bg="transparent" style="background:repeating-conic-gradient(#ccc 0% 25%,#fff 0% 50%) 0 0/12px 12px;border:1px solid #dde" title="Transparent"></div>
           </div>
           <div class="form-row" style="margin-bottom:6px">
             <span class="form-label">Color</span>
@@ -762,6 +767,11 @@ input[type=color]{
     <section class="preview-panel" id="preview-panel">
       <div class="preview-bar">
         <span class="panel-label">Preview</span>
+        <div style="display:flex;align-items:center;gap:6px;margin-left:8px">
+          <span style="font-size:10.5px;color:var(--text-3)">Zoom</span>
+          <input type="range" id="preview-zoom" min="50" max="150" value="100" step="5" style="width:72px;accent-color:var(--accent);height:3px;cursor:pointer">
+          <span id="zoom-val" style="font-size:10.5px;color:var(--text-3);min-width:32px;font-variant-numeric:tabular-nums">100%</span>
+        </div>
         <div class="export-group">
           <button class="exp-btn" data-fmt="png">PNG</button>
           <button class="exp-btn" data-fmt="jpeg">JPEG</button>
@@ -773,6 +783,15 @@ input[type=color]{
 
       <div class="preview-canvas" id="preview-canvas">
         <div id="code-card">
+          <div class="card-titlebar" id="card-titlebar">
+            <div class="mac-dots">
+              <div class="mac-dot" style="background:#ff5f57"></div>
+              <div class="mac-dot" style="background:#febc2e"></div>
+              <div class="mac-dot" style="background:#28c840"></div>
+            </div>
+            <span class="card-filename" id="card-filename">untitled.js</span>
+            <span class="card-lang-badge" id="card-lang-badge">js</span>
+          </div>
           <div class="card-body">
             <div id="line-nums"></div>
             <div id="code-display-wrap" style="padding:16px">
@@ -840,7 +859,7 @@ const S = {
   showLineNums: true,
   wordWrap: false,
   showLangBadge: true,
-  bg: 'linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%)',
+  bg: '#f8f9fc',
   shadow: '',
   borderRadius: 12,
   hlLines: [],
@@ -1534,6 +1553,20 @@ editorWrap.addEventListener('dragover', e => e.preventDefault());
 editorWrap.addEventListener('drop', e => {
   e.preventDefault(); dropOv.classList.remove('show');
   if (e.dataTransfer.files[0]) readFile(e.dataTransfer.files[0]);
+});
+
+// Zoom
+$('preview-zoom').addEventListener('input', e => {
+  const z = e.target.value;
+  $('zoom-val').textContent = z + '%';
+  $('code-card').style.transform = `scale(${z/100})`;
+  $('code-card').style.transformOrigin = 'top center';
+});
+
+// Titlebar toggle
+$('show-titlebar').addEventListener('change', e => {
+  S.showTitlebar = e.target.checked;
+  $('card-titlebar').style.display = e.target.checked ? '' : 'none';
 });
 
 // App theme toggle
