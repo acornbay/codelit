@@ -521,7 +521,60 @@ input[type=color]{
 @keyframes spin{to{transform:rotate(360deg)}}
 .loading-msg{font-size:13px;color:var(--text-2)}
 
-/* ── Responsive ── */
+/* ── LaTeX Theme ── */
+#code-card.latex-theme {
+  background: #ffffff !important;
+  border: 1px solid #000 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+#code-card.latex-theme .card-titlebar {
+  background: #ffffff;
+  border-bottom: 1px solid #000;
+}
+#code-card.latex-theme .card-filename {
+  color: #000;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+}
+#code-card.latex-theme .card-lang-badge {
+  color: #000;
+  opacity: 0.35;
+}
+#code-card.latex-theme #line-nums {
+  color: #bbb !important;
+  border-right: 1px solid #ddd;
+  background: #ffffff;
+  opacity: 1 !important;
+}
+#code-card.latex-theme #code-display-wrap {
+  background: #ffffff;
+}
+/* LaTeX hljs — pure b&w base, colour only on meaningful tokens */
+.latex-hljs .hljs            { background: #ffffff; color: #111; }
+.latex-hljs .hljs-comment,
+.latex-hljs .hljs-doctag     { color: #999; font-style: italic; font-weight: normal; }
+.latex-hljs .hljs-keyword,
+.latex-hljs .hljs-built_in,
+.latex-hljs .hljs-type,
+.latex-hljs .hljs-class,
+.latex-hljs .hljs-tag,
+.latex-hljs .hljs-name       { color: #111; font-weight: bold; }
+.latex-hljs .hljs-string     { color: #1a7a1a; }
+.latex-hljs .hljs-number,
+.latex-hljs .hljs-literal    { color: #c0392b; }
+.latex-hljs .hljs-function,
+.latex-hljs .hljs-title      { color: #111; font-weight: bold; }
+.latex-hljs .hljs-attr,
+.latex-hljs .hljs-variable,
+.latex-hljs .hljs-params     { color: #111; }
+.latex-hljs .hljs-meta       { color: #888; }
+.latex-hljs .hljs-section    { color: #111; font-weight: bold; }
+.latex-hljs .hljs-selector-class,
+.latex-hljs .hljs-selector-id { color: #111; }
+.latex-hljs .hljs-emphasis   { font-style: italic; }
+.latex-hljs .hljs-strong     { font-weight: bold; }
+
 @media(max-width:900px){
   .sidebar{width:200px}
   .preview-panel{width:42%}
@@ -620,6 +673,9 @@ input[type=color]{
               <option value="base16/solarized-light">Solarized Light</option>
               <option value="a11y-light">A11y Light</option>
               <option value="base16/gruvbox-light-hard">Gruvbox Light</option>
+            </optgroup>
+            <optgroup label="── Special ──">
+              <option value="latex">LaTeX</option>
             </optgroup>
           </select>
         </div>
@@ -1028,7 +1084,7 @@ function applyStyles() {
 
   card.style.width = S.cardWidth + 'px';
   card.style.borderRadius = S.borderRadius + 'px';
-  card.style.background = S.bg;
+  card.style.background = S._latexMode ? '#ffffff' : S.bg;
   card.style.boxShadow = S.shadow;
   card.style.overflow = 'hidden';
 
@@ -1055,8 +1111,33 @@ function applyStyles() {
 function setCodeTheme(t) {
   S.codeTheme = t;
   const link = $('hljs-theme');
-  link.href = `https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/${t}.min.css`;
-  link.onload = highlight;
+  const card = $('code-card');
+  const out  = $('code-output');
+
+  if (t === 'latex') {
+    // Use a neutral base stylesheet and apply our own LaTeX colours
+    link.href = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css';
+    card.classList.add('latex-theme');
+    out.classList.add('latex-hljs');
+    // Override card background to parchment
+    S._latexMode = true;
+    link.onload = () => {
+      // Force parchment background via inline style (wins over bg swatch)
+      $('code-card').style.background = '#ffffff';
+      highlight();
+    };
+  } else {
+    // Restore normal mode
+    if (S._latexMode) {
+      card.classList.remove('latex-theme');
+      out.classList.remove('latex-hljs');
+      S._latexMode = false;
+      // Restore user-chosen background
+      $('code-card').style.background = S.bg;
+    }
+    link.href = `https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/${t}.min.css`;
+    link.onload = highlight;
+  }
 }
 
 // ════════════════════════════════════════════════════════
