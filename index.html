@@ -587,6 +587,16 @@ input[type=color]{
   .main{position:relative}
   .panel.active{display:flex!important}
 }
+
+/* ── Ad banner ── */
+.ad-banner{
+  flex-shrink:0;
+  background:var(--panel);
+  border-top:1px solid var(--border);
+  padding:6px 16px;
+  display:flex;align-items:center;justify-content:center;
+  min-height:60px;overflow:hidden;
+}
 </style>
 </head>
 <body>
@@ -916,11 +926,14 @@ input[type=color]{
 
   </div><!-- .main -->
 
-  <!-- ══ ADS ══ -->
-  <div style="width:100%;background:var(--panel);border-top:1px solid var(--border);flex-shrink:0">
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2877940277070561" data-ad-slot="7109840038" data-ad-format="auto" data-full-width-responsive="true"></ins>
-    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    <ins class="adsbygoogle" style="display:block" data-ad-format="autorelaxed" data-ad-client="ca-pub-2877940277070561" data-ad-slot="9151655802"></ins>
+  <!-- ══ AD BANNER ══ -->
+  <div class="ad-banner">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-2877940277070561"
+         data-ad-slot="7109840038"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
   </div>
 
